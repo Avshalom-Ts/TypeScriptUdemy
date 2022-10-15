@@ -1,0 +1,33 @@
+"use strict";
+class Sorter {
+    // collection: number[]; //insted public
+    constructor(collection) {
+        this.collection = collection;
+        // this.collection = collection;// insted public
+    }
+    //Boble sort
+    sort() {
+        const length = this.collection.length;
+        for (let i = 0; i < length; i++) {
+            for (let j = 0; j < length - i - 1; j++) {
+                if (this.collection instanceof Array) {
+                    //Type GUARD = that meens that if the type is Array it will be true
+                    if (this.collection[j] > this.collection[j + 1]) {
+                        const temp = this.collection[j];
+                        this.collection[j] = this.collection[j + 1];
+                        this.collection[j + 1] = temp;
+                    }
+                }
+                if (this.collection instanceof String) {
+                    console.log(`This is a string: ${this.collection}`);
+                }
+            }
+        }
+    }
+}
+const sorter = new Sorter([10, 5, -3, 0]);
+sorter.sort();
+console.log(sorter.collection);
+const sorterSTR = new Sorter('Avshalom');
+sorterSTR.sort();
+console.log(sorterSTR.collection);
