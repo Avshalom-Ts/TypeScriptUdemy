@@ -1,14 +1,16 @@
-interface Sortable {
-  length: number;
-  compare(leftIndex: number, rightIndex: number): boolean;
-  swap(leftIndex: number, rightIndex: number): void;
-}
+// interface Sortable {
+//   length: number;
+//   compare(leftIndex: number, rightIndex: number): boolean;
+//   swap(leftIndex: number, rightIndex: number): void;
+// }
+//Becouse we define Sorter class as Father class by implementing extends of we dont need the interface anymore
 export abstract class Sorter {
   // collection: number[]; //insted public
 
   // constructor(public collection: Sortable) {
   // this.collection = collection;// insted public
   // }
+  //abstract is promis from the child claas to deliver the value
   abstract compare(leftIndex: number, rightIndex: number): boolean;
   abstract swap(leftIndex: number, rightIndex: number): void;
   abstract length: number;

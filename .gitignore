@@ -5,3 +5,6 @@ maps/node_modules
 
 # sort-project
 sort/node_modules
+
+#stats-project
+stats/node_modules
