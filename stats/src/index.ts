@@ -1,18 +1,16 @@
+import { MatchReader } from './MatchReader';
 import { CsvFileReader } from './CsvFileReader';
-import { MatchResult } from './MatchResult';
+import { ConsoleReport } from './reportTargets/ConsoleReport';
+import { WinAnalysis } from './analyzers/WinAnalysis';
+import { Summary } from './Summary';
+import { HtmlReport } from './reportTargets/HtmlReport';
 
-//Export bit string and converting it to a 2d array of strings
-const reader = new CsvFileReader('football.csv');
-reader.read();
-const dateOfFirstMatch = reader.data[0][0];
-console.log(dateOfFirstMatch);
+// Creat an object that satisfies the 'DataReader' interface
+const csvFileReader = new CsvFileReader('football.csv');
+//Creat an instance of MatchReader and pass in something satisfying the 'DataReader' interface
+const matchreader = new MatchReader(csvFileReader);
+matchreader.load();
 
-let manUnitedWins = 0;
-for (let match of reader.data) {
-  if (match[1] === 'Man United' && match[5] === MatchResult.HomeWin) {
-    manUnitedWins++;
-  } else if (match[2] === 'Man United' && match[5] === MatchResult.AwayWin) {
-    manUnitedWins++;
-  }
-}
-console.log(`Man United WON ${manUnitedWins} games.`);
+const summary = new Summary(new WinAnalysis('Tottenham'), new HtmlReport());
+
+summary.buildAndPrintReport(matchreader.matches);
