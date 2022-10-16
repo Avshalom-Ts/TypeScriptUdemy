@@ -1,14 +1,8 @@
-import fs from 'fs';
+import { CsvFileReader } from './CsvFileReader';
 
 //Export bit string and converting it to a 2d array of strings
-const matches = fs
-  .readFileSync('football.csv', {
-    encoding: 'utf-8',
-  })
-  .split('\n')
-  .map((row: string): string[] => {
-    return row.split(',');
-  });
+const reader = new CsvFileReader('football.csv');
+reader.read();
 
 // console.log(matches[10]);
 //First Solution
@@ -29,7 +23,7 @@ enum MatchResult {
   Draw = 'D',
 }
 let manUnitedWins = 0;
-for (let match of matches) {
+for (let match of reader.data) {
   if (match[1] === 'Man United' && match[5] === MatchResult.HomeWin) {
     manUnitedWins++;
   } else if (match[2] === 'Man United' && match[5] === MatchResult.AwayWin) {
