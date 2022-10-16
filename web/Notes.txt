@@ -1,0 +1,8 @@
+1. First install parcel if not alredy 
+$ npm i -g parcel-bundler
+2. Creat folder src/
+3. creat file index.ts in src folder with console.log('Hi there') to check its working in 
+    console of the web browser
+4. creat index.html in the root folder with script pointing to the src/index.ts
+5. run in the terminal
+$ parcel index.html

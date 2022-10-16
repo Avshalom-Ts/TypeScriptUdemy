@@ -11,3 +11,6 @@ stats/node_modules
 
 #stats-Compare-project
 statsCompare/node_modules
+
+#Web-project
+web/node_modules
