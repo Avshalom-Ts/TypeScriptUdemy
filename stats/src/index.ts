@@ -13,8 +13,7 @@ import { HtmlReport } from './reportTargets/HtmlReport';
 
 const matchReader = MatchReader.fromCsv('football.csv');
 
-// const summary = new Summary(new WinAnalysis('Tottenham'), new HtmlReport());
+// const summary = new Summary(new WinAnalysis('Bournemouth'), new HtmlReport());
 const summary = Summary.winsAnalysisWithhtmlReport('Man United');
 
-// summary.buildAndPrintReport(matchReader.matches);
 summary.buildAndPrintReport(matchReader.matches);
