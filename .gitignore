@@ -14,3 +14,4 @@ statsCompare/node_modules
 
 #Web-project
 web/node_modules
+web/.cache
