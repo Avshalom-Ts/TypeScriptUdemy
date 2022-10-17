@@ -3,8 +3,11 @@ maps/.cache
 maps/dist
 maps/node_modules
 
-# sort-project
+#sort-project
 sort/node_modules
+
+#fetch-json-project
+fetchjson/node_modules
 
 #stats-project
 stats/node_modules
