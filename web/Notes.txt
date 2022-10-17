@@ -6,3 +6,12 @@ $ npm i -g parcel-bundler
 4. creat index.html in the root folder with script pointing to the src/index.ts
 5. run in the terminal
 $ parcel index.html
+6. install json server for the backEnd
+$ npm i -g json-server
+7. Creat db.json and add {"users":[]}
+8. run in terminal 
+$ json-server -w db.json
+9. install axios (for http requests) then stage 5. agein
+$ npm i axios
+
+
