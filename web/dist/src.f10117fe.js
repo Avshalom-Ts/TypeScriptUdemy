@@ -129,28 +129,20 @@ var Model = /** @class */function () {
     this.attributes = attributes;
     this.events = events;
     this.sync = sync;
+    // get on() {
+    //   return this.events.on;
+    // }
+    //insted
+    this.on = this.events.on;
+    // get trigger() {
+    //   return this.events.trigger;
+    // }
+    this.trigger = this.events.trigger;
+    // get get() {
+    //   return this.attributes.get;
+    // }
+    this.get = this.attributes.get;
   }
-  Object.defineProperty(Model.prototype, "on", {
-    get: function get() {
-      return this.events.on;
-    },
-    enumerable: false,
-    configurable: true
-  });
-  Object.defineProperty(Model.prototype, "trigger", {
-    get: function get() {
-      return this.events.trigger;
-    },
-    enumerable: false,
-    configurable: true
-  });
-  Object.defineProperty(Model.prototype, "get", {
-    get: function get() {
-      return this.get;
-    },
-    enumerable: false,
-    configurable: true
-  });
   Model.prototype.set = function (update) {
     this.attributes.set(update);
     this.events.trigger('change');
@@ -5591,7 +5583,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36879" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43889" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

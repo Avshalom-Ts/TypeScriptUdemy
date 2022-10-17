@@ -10,7 +10,7 @@ interface Sync<T> {
   save(data: T): AxiosPromise;
 }
 interface Events {
-  on(eventNmae: string, callback: () => {}): void;
+  on(eventNmae: string, callback: () => void): void;
   trigger(eventName: string): void;
 }
 interface HasId {
@@ -23,16 +23,20 @@ export class Model<T extends HasId> {
     private sync: Sync<T>
   ) {}
 
-  get on() {
-    return this.events.on;
-  }
-  get trigger() {
-    return this.events.trigger;
-  }
+  // get on() {
+  //   return this.events.on;
+  // }
+  //insted
+  on = this.events.on;
 
-  get get() {
-    return this.get;
-  }
+  // get trigger() {
+  //   return this.events.trigger;
+  // }
+  trigger = this.events.trigger;
+  // get get() {
+  //   return this.attributes.get;
+  // }
+  get = this.attributes.get;
 
   set(update: T): void {
     this.attributes.set(update);
