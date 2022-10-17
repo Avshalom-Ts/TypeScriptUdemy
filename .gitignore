@@ -16,9 +16,9 @@ stats/node_modules
 statsCompare/node_modules
 
 #Web-project
-web/node_modules
-web/.cache
-web/dist
+web/node_modules/
+web/.cache/
+web/dist/
 
 #Web-Compare-Project
 webCompare/.cache

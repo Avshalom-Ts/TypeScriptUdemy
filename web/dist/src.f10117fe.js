@@ -126,24 +126,25 @@ Object.defineProperty(exports, "__esModule", {
 exports.Eventing = void 0;
 var Eventing = /** @class */function () {
   function Eventing() {
+    var _this = this;
     //When we dont know the annotetion of type we can give
     // [key:string] so we only know that it will be string
     this.events = {};
+    this.on = function (eventName, callBack) {
+      var handlers = _this.events[eventName] || [];
+      handlers.push(callBack);
+      _this.events[eventName] = handlers;
+    };
+    this.trigger = function (eventName) {
+      var handlers = _this.events[eventName];
+      if (!handlers || handlers.length === 0) {
+        return;
+      }
+      handlers.forEach(function (callback) {
+        callback();
+      });
+    };
   }
-  Eventing.prototype.on = function (eventName, callBack) {
-    var handlers = this.events[eventName] || [];
-    handlers.push(callBack);
-    this.events[eventName] = handlers;
-  };
-  Eventing.prototype.trigger = function (eventName) {
-    var handlers = this.events[eventName];
-    if (!handlers || handlers.length === 0) {
-      return;
-    }
-    handlers.forEach(function (callback) {
-      callback();
-    });
-  };
   return Eventing;
 }();
 exports.Eventing = Eventing;
@@ -5425,11 +5426,12 @@ Object.defineProperty(exports, "__esModule", {
 exports.Attributes = void 0;
 var Attributes = /** @class */function () {
   function Attributes(data) {
+    var _this = this;
     this.data = data;
+    this.get = function (key) {
+      return _this.data[key];
+    };
   }
-  Attributes.prototype.get = function (key) {
-    return this.data[key];
-  };
   Attributes.prototype.set = function (update) {
     // this.data.name = update.name;
     // this.data.age = update.age;
@@ -5437,6 +5439,9 @@ var Attributes = /** @class */function () {
     Object.assign({
       data: this.data
     }, update);
+  };
+  Attributes.prototype.getAll = function () {
+    return this.data;
   };
   return Attributes;
 }();
@@ -5476,11 +5481,33 @@ var User = /** @class */function () {
   });
   Object.defineProperty(User.prototype, "get", {
     get: function get() {
-      return this.attributes.get;
+      return this.get;
     },
     enumerable: false,
     configurable: true
   });
+  User.prototype.set = function (update) {
+    this.attributes.set(update);
+    this.events.trigger('change');
+  };
+  User.prototype.fetch = function () {
+    var _this = this;
+    var id = this.attributes.get('id');
+    if (typeof id !== 'number') {
+      throw new Error('Cannot fetch without id');
+    }
+    this.sync.fetch(id).then(function (response) {
+      _this.set(response.data);
+    });
+  };
+  User.prototype.save = function () {
+    var _this = this;
+    this.sync.save(this.attributes.getAll()).then(function (response) {
+      _this.trigger('save');
+    }).catch(function () {
+      _this.trigger('error');
+    });
+  };
   return User;
 }();
 exports.User = User;
@@ -5492,9 +5519,14 @@ Object.defineProperty(exports, "__esModule", {
 });
 var User_1 = require("./models/User");
 var user = new User_1.User({
-  name: 'New name',
-  age: 50
+  id: 4,
+  name: 'newer',
+  age: 120
 });
+user.on('save', function () {
+  console.log(user);
+});
+user.save();
 },{"./models/User":"src/models/User.ts"}],"../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -5520,7 +5552,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34929" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36879" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
