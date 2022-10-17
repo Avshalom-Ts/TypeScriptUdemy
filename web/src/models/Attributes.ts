@@ -10,6 +10,6 @@ export class Attributes<T> {
     // this.data.name = update.name;
     // this.data.age = update.age;
     //OR with build in function that resive two value and asign one to anothere
-    Object.assign(this.data, update);
+    Object.assign({ data: this.data }, update);
   }
 }
